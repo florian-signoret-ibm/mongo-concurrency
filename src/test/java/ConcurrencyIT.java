@@ -32,6 +32,8 @@ public class ConcurrencyIT {
 
     private static MongoClient mongoClient;
 
+    private static final int UPDATE_SLEEP_TIME_MILLISECONDS = 500;
+    private static final int LIST_SLEEP_TIME_MILLISECONDS = 250;
     private static final int DOCUMENT_CREATION_ITERATION_COUNT = 100;
     private static final int UNDONE_DOCUMENT_COUNT = DOCUMENT_CREATION_ITERATION_COUNT * 2 + 1;
 
@@ -104,9 +106,9 @@ public class ConcurrencyIT {
             try {
                 for (int i = 0; i < 1000; ++i) {
                     updateMyTask(IN_PROGRESS_STATUS);
-                    Thread.sleep(500);
+                    Thread.sleep(UPDATE_SLEEP_TIME_MILLISECONDS);
                     updateMyTask(TODO_STATUS);
-                    Thread.sleep(500);
+                    Thread.sleep(UPDATE_SLEEP_TIME_MILLISECONDS);
                 }
                 isSuccess = true;
             } catch (Exception e) {
@@ -158,7 +160,7 @@ public class ConcurrencyIT {
                 int queryCount = 0;
                 while (allCountOk) {
                     ++queryCount;
-                    Thread.sleep(250);
+                    Thread.sleep(LIST_SLEEP_TIME_MILLISECONDS);
                     int undoneCount = countUndoneTasks();
                     if (undoneCount != UNDONE_DOCUMENT_COUNT) {
                         allCountOk = false;
