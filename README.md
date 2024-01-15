@@ -22,7 +22,7 @@ Docker, docker-compose, java 17, maven.
 `mvn clean install`
 
 ## Concurrency integration test
-The test first creates a collection named "task" containing documents with the followings fields:
+The test first creates a collection named "task" containing documents with the following fields:
 * name
 * status (values: TODO, IN_PROGRESS, DONE)
 
